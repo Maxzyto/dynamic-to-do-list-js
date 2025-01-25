@@ -48,6 +48,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Check if the task input is empty
     if (taskText === "") {
+      // Create a new task list item
+      const listItem = document.createElement("li");
+      listItem.textContent = taskText;
+
+      // Create a remove button
+      const removeButton = document.createElement("button");
+      removeButton.textContent = "Remove";
+      removeButton.className = "remove-btn";
+
+      // Add an event listener to remove the task
+      removeButton.onclick = function () {
+        if (taskList) {
+          taskList.removeChild(listItem);
+          saveTasks();
+        }
+      };
+
+      // Append the remove button to the list item
+      listItem.appendChild(removeButton);
+
+      // Append the list item to the task list
+      if (taskList) {
+        taskList.appendChild(listItem);
+      } else {
+        alert("Task list element not found!");
+      }
+
+      // Clear the task input field
+      taskInput.value = "";
+
+      // Save tasks to Local Storage
+      saveTasks();
       alert("Please enter a task!");
       return;
     }
