@@ -3,6 +3,40 @@ document.addEventListener("DOMContentLoaded", function () {
   const addButton = document.getElementById("add-task-btn");
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
+  // Load tasks from Local Storage
+  function loadTasks() {
+    const tasks = localStorage.getItem("tasks");
+    if (tasks && taskList) {
+      JSON.parse(tasks).forEach((taskText: string) => {
+        const listItem = document.createElement("li");
+        listItem.textContent = taskText;
+
+        const removeButton = document.createElement("button");
+        removeButton.textContent = "Remove";
+        removeButton.className = "remove-btn";
+
+        removeButton.onclick = function () {
+          if (taskList) {
+            taskList.removeChild(listItem);
+            saveTasks();
+          }
+        };
+
+        listItem.appendChild(removeButton);
+        taskList.appendChild(listItem);
+      });
+    }
+  }
+
+  // Save tasks to Local Storage
+  function saveTasks() {
+    if (taskList) {
+      const tasks = Array.from(taskList.children).map(
+        (item) => item.firstChild?.textContent
+      );
+      localStorage.setItem("tasks", JSON.stringify(tasks));
+    }
+  }
 
   // Define the addTask function
   function addTask() {
@@ -61,4 +95,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
+  // Call loadTasks when the DOM is fully loaded
+  loadTasks();
 });
