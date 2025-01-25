@@ -4,29 +4,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const taskInput = document.getElementById("task-input");
   const taskList = document.getElementById("task-list");
   // Load tasks from Local Storage
-  function loadTasks() {
-    const tasks = localStorage.getItem("tasks");
-    if (tasks && taskList) {
-      JSON.parse(tasks).forEach((taskText: string) => {
-        const listItem = document.createElement("li");
-        listItem.textContent = taskText;
+  // function loadTasks() {
+  //   const tasks = localStorage.getItem("tasks");
+  //   if (tasks && taskList) {
+  //     JSON.parse(tasks).forEach((taskText: string) => {
+  //       const listItem = document.createElement("li");
+  //       listItem.textContent = taskText;
 
-        const removeButton = document.createElement("button");
-        removeButton.textContent = "Remove";
-        removeButton.className = "remove-btn";
+  //       const removeButton = document.createElement("button");
+  //       removeButton.textContent = "Remove";
+  //       removeButton.className = "remove-btn";
 
-        removeButton.onclick = function () {
-          if (taskList) {
-            taskList.removeChild(listItem);
-            saveTasks();
-          }
-        };
+  //       removeButton.onclick = function () {
+  //         if (taskList) {
+  //           taskList.removeChild(listItem);
+  //           saveTasks();
+  //         }
+  //       };
 
-        listItem.appendChild(removeButton);
-        taskList.appendChild(listItem);
-      });
-    }
-  }
+  //       listItem.appendChild(removeButton);
+  //       taskList.appendChild(listItem);
+  //     });
+  //   }
+  // }
 
   // Save tasks to Local Storage
   function saveTasks() {
