@@ -57,6 +57,30 @@ document.addEventListener("DOMContentLoaded", function () {
       alert("Please enter a task!");
       return;
     }
+    // Create a new task list item
+    const listItem = document.createElement("li");
+    listItem.textContent = taskText;
+
+    // Create a remove button
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.className = "remove-btn";
+
+    // Add an event listener to remove the task
+    removeButton.onclick = function () {
+      if (taskList) {
+        taskList.removeChild(listItem);
+      }
+      saveTasks(); // Update Local Storage after removing a task
+    };
+
+    // Append the remove button to the list item
+    listItem.appendChild(removeButton);
+
+    // Append the list item to the task list
+    if (taskList) {
+      taskList.appendChild(listItem);
+    }
 
     // Add task to DOM
     addTaskToDOM(taskText);
